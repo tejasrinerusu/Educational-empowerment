@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('/Users/tejasrinerusu/Downloads/images.png' ); /* Replace 'your-background-image.jpg' with the actual image file path */
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: "lavender";
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 50px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 50px;
+        }
+
+        input {
+            width: 80%;
+            padding: 20px;
+            margin-bottom: 50px;
+            box-sizing: border-box;
+        }
+
+        .call-symbol {
+            display: inline-block;
+            font-size: 20px;
+            color:#34db93;
+        }
+
+        .call-symbol-left {
+            margin-right: 10px;
+        }
+
+        .call-symbol-right {
+            margin-left: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color:#3498db;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+    <title>Phone Number OTP</title>
+</head>
+<body bgcolor="lavender">
+
+<div class="container">
+    
+    <div>
+        <label for="phoneNumber">Phone Number:</label>
+        <span class="call-symbol call-symbol-left">&#x260E;</span>
+        <input type="tel" id="actualPhoneNumber" placeholder="Enter phone number">
+        
+    </div>
+
+    <button onclick="sendOTP()">Send OTP</button>
+</div>
+
+<script>
+    function sendOTP() {
+        var actualPhoneNumber = document.getElementById('actualPhoneNumber').value;
+        // Perform validation (you can use regular expressions or other validation methods)
+        if (/^\d{10}$/.test(actualPhoneNumber)) {
+            // Valid phone number format
+            alert('OTP sent successfully!');
+            // You can add code here to send the OTP through an API or perform other actions.
+        } else {
+            alert('Please enter a valid 10-digit phone number.');
+        }
+        window.location.href="page1.html";
+    }
+</script>
+
+</body>
+</html>
