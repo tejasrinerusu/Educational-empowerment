@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Camera Capture</title>
+    <style>
+        #videoContainer {
+            text-align: center;
+        }
+        video {
+            max-width: 100%;
+            margin-bottom: 10px;
+        }
+        #captureButton, #galleryButton {
+            padding: 40px; /* Increase padding for larger buttons */
+            font-size: 60px; /* Increase font size for larger icons */
+            cursor: pointer;
+            margin: 300px 100px 200px 20px; 
+            
+        }
+    </style>
+</head>
+<body>
+    <center>
+
+    <div id="videoContainer">
+        <video id="liveVideo" playsinline autoplay></video>
+        <button id="captureButton" onclick="captureAndStop()">📷 </button>
+        <input type="file" id="selfie" name="selfie" accept="image/*" capture="user" style="display:none" onchange="gallerySelected()" />
+        <button id="galleryButton" onclick="document.getElementById('selfie').click()">🖼️ </button>
+    </div>
+
+    <script>
+        let videoStream; // Global variable to store the video stream
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get access to the user's camera
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    const videoElement = document.getElementById("liveVideo");
+                    videoElement.srcObject = stream;
+                    videoStream = stream; // Store the stream in the global variable
+                })
+                .catch(function (error) {
+                    console.error("Error accessing the camera: ", error);
+                });
+        });
+
+        function captureAndStop() {
+            const videoElement = document.getElementById("liveVideo");
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
+
+            // Set the canvas dimensions to match the video feed
+            canvas.width = videoElement.videoWidth;
+            canvas.height = videoElement.videoHeight;
+
+            // Draw the current frame from the video feed onto the canvas
+            context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+            // Stop the video stream
+            videoStream.getTracks().forEach(track => track.stop());
+
+            // Convert the canvas content to a data URL representing a PNG image
+            const imageDataUrl = canvas.toDataURL("image/png");
+
+            // Create a new image element and set its source to the captured image data
+            const capturedImage = new Image();
+            capturedImage.src = imageDataUrl;
+
+            // Append the captured image to the document or perform further actions as needed
+            document.body.appendChild(capturedImage);
+
+            // Hide the gallery button after capturing
+            document.getElementById('galleryButton').style.display = 'none';
+        }
+
+        function gallerySelected() {
+            const galleryButton = document.getElementById('galleryButton');
+            const captureButton = document.getElementById('captureButton');
+            
+            // Show the camera icon in the capture button
+            captureButton.innerHTML = "📷 Capture";
+
+            // Hide the gallery button after selecting from the gallery
+            galleryButton.style.display = 'none';
+            
+        }
+    </script>
+</center>
+
+</body>
+</html>
