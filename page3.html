@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown List Submission</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color:"lavender";
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select {
+            width: 200px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body bgcolor="lavender">
+
+<div class="container">
+    <label for="dropdown">Language:</label>
+    <select id="dropdown">
+        <option value="తెలుగు">తెలుగు</option>
+        <option value="हिन्दी">हिन्दी</option>
+        <option value="English">English</option>
+        <option value="தமிழ்">தமிழ்</option>
+        <option value="ಕನ್ನಡ">ಕನ್ನಡ</option>
+        <option value="മലയാളം">മലയാളം</option>
+        <option value="मराठी">मराठी</option>
+
+        <!-- Add more options as needed -->
+    </select>
+
+    <br>
+    <br>
+
+    <button onclick="submitForm()">Submit</button>
+</div>
+
+<script>
+    function submitForm() {
+        var selectedOption = document.getElementById('dropdown').value;
+        alert('Selected option: ' + selectedOption);
+        window.location.href="camera3.html"
+        // Add further processing or submit the form data to the server here
+    }
+</script>
+
+</body>
+</html>
